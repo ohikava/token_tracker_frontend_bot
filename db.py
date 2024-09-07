@@ -42,6 +42,10 @@ class DataBase:
     def get_user_tokens(self, user_id):
         self.cursor.execute('SELECT token FROM Users WHERE userId = ?', (user_id,))
         return [row[0] for row in self.cursor.fetchall()]
+    
+    def get_users_by_token(self, token):
+        self.cursor.execute('SELECT userId FROM Users WHERE token = ?', (token,))
+        return [row[0] for row in self.cursor.fetchall()]
 
     def __del__(self):
         if self.conn:
